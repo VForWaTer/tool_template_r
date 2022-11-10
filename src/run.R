@@ -14,21 +14,14 @@ if (toolname == "") {
 # Switch for the different tools available in this package
 if (toolname == "foobar") {
     # RUN the tool here and create the output in /out
-    f <- file("/out/STDOUT.log")
     
-    # STDOUT.log: template tool warning message and parameters
-    sink(f, append = TRUE)
+    # prints to STDOUT.log
     print("You have tried to run the tool 'foobar'.
 This tool is the template tool without any functionality.
-Please implement another tool in or select the tool you 
+Please implement another tool or select the tool you 
 have already implemented.")
     print(params)
-    sink()
-
-    close(f)
 } else {
     # in any other case, the tool was invalid or not configured
-    f <- file("/out/error.log")
-    writeLines(paste("[", Sys.time(), "] Either no TOOL_RUN environment variable available, or '", toolname, "' is not valid.\n", sep=""), con=f)
-    close(f)
+    print(paste("[", Sys.time(), "] Either no TOOL_RUN environment variable available, or '", toolname, "' is not valid.\n", sep = ""))
 }
