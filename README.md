@@ -16,7 +16,7 @@ Each container needs at least the following structure:
 ```
 /
 |- in/
-|  |- tool.json
+|  |- parameters.json
 |- out/
 |  |- ...
 |- src/
@@ -25,10 +25,9 @@ Each container needs at least the following structure:
 |  |- run.R
 ```
 
-* `tool.json` are parameters. Whichever framework runs the container, this is how parameters are passed.
-* `get_parameters.R` is a utility function to parse the `tool.json` including pre-loading of data files.
+* `parameters.json` are parameters. Whichever framework runs the container, this is how parameters are passed.
 * `tool.yml` is the tool specification. It contains metadata about the scope of the tool, the number of endpoints (functions) and their parameters
-* `run.R` is the tool itself, or a R script that handles the execution. It has to capture all outputs and either `print` them to console or create files in `/out`
+* `run.R` is the tool itself, or an R script that handles the execution. It has to capture all outputs and either `print` them to console or create files in `/out`
 
 ## How to build the image?
 
@@ -47,9 +46,9 @@ in the repository secrets in order to run properly.
 
 ## How to run?
 
-This template installs the toolbox-runner python package to parse the parameters in the `/in/tool.json`. This assumes that
+This template uses `get_parameters.R` to parse the parameters in the `/in/parameters.json`. This assumes that
 the files are not renamed and not moved and there is actually only one tool in the container. For any other case, the environment variables
-`PARAM_FILE` can be used to specify a new location for the `tool.json` and `TOOL_RUN` can be used to specify the tool to be executed.
+`PARAM_FILE` can be used to specify a new location for the `parameters.json` and `TOOL_RUN` can be used to specify the tool to be executed.
 The `run.R` has to take care of that.
 
 To invoke the docker container directly run something similar to:
@@ -59,8 +58,7 @@ docker run --rm -it -v /path/to/local/in:/in -v /path/to/local/out:/out -e TOOL_
 
 Then, the output will be in your local out and based on your local input folder. Stdout and Stderr are also connected to the host.
 
-With the [toolbox-runner](https://github.com/hydrocode-de/tool-runner) this is simplyfied. Note that this is a Python-only tool, to handle
-the execution of just any kind of tool from within a Python environment. Frameworks for other languages might be added.
+With the toolbox runner, this is simplyfied:
 
 ```python
 from toolbox_runner import list_tools
