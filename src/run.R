@@ -1,5 +1,5 @@
-# load the parameters parser
-source("get_parameters.R")
+# load json2aRgs for parameter parsing
+library(json2aRgs)
 
 # get the call parameters for the tool
 params <- get_parameters()
@@ -14,7 +14,7 @@ if (toolname == "") {
 # Switch for the different tools available in this package
 if (toolname == "foobar") {
     # RUN the tool here and create the output in /out
-    
+
     # prints to STDOUT.log
     print("You have tried to run the tool 'foobar'.
 This tool is the template tool without any functionality.
