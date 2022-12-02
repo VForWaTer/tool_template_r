@@ -8,7 +8,7 @@ Tools using this template can be run by the [toolbox-runner](https://github.com/
 That is only convenience, the tools implemented using this template are independent of any framework.
 
 The main idea is to implement a common file structure inside container to load inputs and outputs of the 
-tool. The template shares this structures with the [Python template](https://github.com/vforwater/tool_template_python)
+tool. The template shares this structures with the [Python template](https://github.com/vforwater/tool_template_python), [NodeJS template](https://github.com/vforwater/tool_template_node)
 and [Octave template](https://github.com/vforwater/tool_template_octave), but can be mimiced in any container.
 
 Each container needs at least the following structure:
